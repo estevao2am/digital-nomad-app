@@ -30,14 +30,37 @@ const theme = createTheme({
   },
   textVariants: {
     defaults: {
-      // We can define a default text variant here.
       color: "text",
+      fontFamily: "PoppinsRegular",
+    },
+    title28: {
+      fontSize: 28,
+      fontFamily: "PoppinsSemiBold",
+    },
+    title22: {
+      fontSize: 22,
+      fontFamily: "PoppinsSemiBold",
+    },
+    title16: {
+      fontSize: 16,
+      fontFamily: "PoppinsSemiBold",
+    },
+    text18: {
+      fontSize: 18,
+    },
+    text16: {
+      fontSize: 16,
+    },
+    text14: {
+      fontSize: 14,
+    },
+    text12: {
+      fontSize: 12,
     },
   },
   borderRadii: {
     default: 16,
   },
 });
-
 export type Theme = typeof theme;
 export default theme;
