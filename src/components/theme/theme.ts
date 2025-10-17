@@ -27,6 +27,7 @@ const theme = createTheme({
     s40: 40,
     s48: 48,
     s56: 56,
+    padding: 16,
   },
   textVariants: {
     defaults: {
@@ -35,27 +36,37 @@ const theme = createTheme({
     },
     title28: {
       fontSize: 28,
+      lineHeight: 30,
+
       fontFamily: "PoppinsSemiBold",
     },
     title22: {
       fontSize: 22,
+      lineHeight: 24,
+
       fontFamily: "PoppinsSemiBold",
     },
     title16: {
       fontSize: 16,
+      lineHeight: 18,
+
       fontFamily: "PoppinsSemiBold",
     },
     text18: {
       fontSize: 18,
+      lineHeight: 20,
     },
     text16: {
       fontSize: 16,
+      lineHeight: 18,
     },
     text14: {
       fontSize: 14,
+      lineHeight: 16,
     },
     text12: {
       fontSize: 12,
+      lineHeight: 14,
     },
   },
   borderRadii: {
@@ -63,4 +74,5 @@ const theme = createTheme({
   },
 });
 export type Theme = typeof theme;
+export type ThemeColors = keyof Theme["colors"];
 export default theme;
