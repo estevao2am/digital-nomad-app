@@ -1,3 +1,4 @@
+import React from "react";
 import { ImageBackground } from "react-native";
 import { CityPreview } from "../types";
 import { Box } from "./Box";

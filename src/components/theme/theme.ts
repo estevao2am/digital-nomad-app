@@ -18,6 +18,7 @@ const theme = createTheme({
     ...palette, // repassar as cores
   },
   spacing: {
+    s8: 8,
     s10: 10,
     s12: 12,
     s14: 14,
@@ -72,6 +73,10 @@ const theme = createTheme({
   },
   borderRadii: {
     default: 16,
+    rounded: 500,
+  },
+  boxShadows: {
+    primary: "3px 3px 10px 3px rgba(255, 75, 75, 0.4)",
   },
 });
 export type Theme = typeof theme;

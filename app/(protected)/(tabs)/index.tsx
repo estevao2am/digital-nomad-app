@@ -1,6 +1,7 @@
 import { CityCard } from "@/src/components/CityCard";
 import { Screen } from "@/src/components/Screen";
 import { useAppTheme } from "@/src/components/theme/useAppTheme";
+import { CityFilter } from "@/src/containers/CityFilter";
 import { cityPreviewList } from "@/src/data/cities";
 import { CityPreview } from "@/src/types";
 import { useScrollToTop } from "@react-navigation/native";
@@ -34,6 +35,7 @@ export default function HomeScreen() {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
+        ListHeaderComponent={<CityFilter />}
       />
     </Screen>
   );
