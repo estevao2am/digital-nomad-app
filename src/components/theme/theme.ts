@@ -6,6 +6,7 @@ const palette = {
   charcoalGrey: "#302E2D",
   stoneGrey: "#5C5C5C",
   pureWhite: "#FFFFFF",
+  transparent: "transparent",
 };
 
 const theme = createTheme({
@@ -18,6 +19,7 @@ const theme = createTheme({
     ...palette, // repassar as cores
   },
   spacing: {
+    s4: 4,
     s8: 8,
     s10: 10,
     s12: 12,

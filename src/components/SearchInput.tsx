@@ -43,6 +43,7 @@ export function SearchInput({
 
 const boxStyle: BoxProps = {
   flexDirection: "row",
+  paddingLeft: "s16",
   padding: "s8",
   justifyContent: "space-between",
   backgroundColor: "gray1",
