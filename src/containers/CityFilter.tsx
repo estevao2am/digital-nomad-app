@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ScrollView } from "react-native";
 import { Box } from "../components/Box";
 import { CategoryPill } from "../components/CategoryPill";
@@ -7,27 +6,39 @@ import { Category } from "../types";
 
 type CityFilterProps = {
   categories: Category[];
+  cityName: string;
+  onChangeCityName: (name: string) => void;
+  selectedCategoryId: string | null;
+  onChangeSelectedCategoryId: (id: string | null) => void;
 };
-export function CityFilter({ categories }: CityFilterProps) {
-  const [name, setName] = useState("");
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
-    null
-  );
+export function CityFilter({
+  categories,
+  onChangeCityName,
+  cityName,
+  selectedCategoryId,
+  onChangeSelectedCategoryId,
+}: CityFilterProps) {
   return (
     <Box>
-      <SearchInput
-        value={name}
-        onChangeText={setName}
-        placeholder="Qual é o seu proximo destino ?"
-      />
-
+      <Box paddingHorizontal="padding">
+        <SearchInput
+          value={cityName}
+          onChangeText={onChangeCityName}
+          placeholder="Qual é o seu proximo destino ?"
+        />
+      </Box>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <Box mt="s16" flexDirection="row" gap="s8">
+        <Box mt="s16" flexDirection="row" gap="s8" paddingHorizontal="padding">
           {categories.map((category) => (
             <CategoryPill
               key={category.id}
-              active={category.id == selectedCategoryId}
+              active={category.id === selectedCategoryId}
               category={category}
+              onPress={() =>
+                onChangeSelectedCategoryId(
+                  category.id === selectedCategoryId ? null : category.id
+                )
+              }
             />
           ))}
         </Box>
