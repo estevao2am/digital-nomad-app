@@ -40,7 +40,13 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Stack>
+      <Stack
+        screenOptions={{
+          contentStyle: {
+            backgroundColor: theme.colors.background, // para nao piscar o fundo branco ao navegar
+          },
+        }}
+      >
         <Stack.Screen name="(protected)" options={{ headerShown: false }} />
         <Stack.Screen name="sign-in" options={{ headerShown: false }} />
 
