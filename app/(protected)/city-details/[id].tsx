@@ -57,7 +57,7 @@ export default function CityDetails() {
 
         <Divider paddingHorizontal="padding" />
 
-        <CityDetailsRelatedCities />
+        <CityDetailsRelatedCities relatedCitiesIds={city.relatedCitiesIds} />
       </Screen>
       <BottomSheetMap
         location={city.location}
