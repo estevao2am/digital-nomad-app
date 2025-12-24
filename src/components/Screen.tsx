@@ -16,7 +16,9 @@ export function Screen({
       paddingHorizontal="padding"
       {...boxPops}
     >
-      <Container>{children}</Container>
+      <Container bounces={false} showsVerticalScrollIndicator={false}>
+        {children}
+      </Container>
     </Box>
   );
 }
