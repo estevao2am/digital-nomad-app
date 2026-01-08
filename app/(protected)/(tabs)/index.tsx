@@ -3,15 +3,15 @@ import { CityCard } from "@/src/components/CityCard";
 import { Screen } from "@/src/components/Screen";
 import { useAppTheme } from "@/src/components/theme/useAppTheme";
 import { CityFilter } from "@/src/containers/CityFilter";
-import { categories } from "@/src/data/categories";
+import { useCategories } from "@/src/data/useCategories";
 import { useCities } from "@/src/data/useCities";
 import { useDebounce } from "@/src/hooks/useDebounce";
 import { CityPreview } from "@/src/types";
 import { useScrollToTop } from "@react-navigation/native";
 import { useRef, useState } from "react";
-import { FlatList, ListRenderItemInfo } from "react-native";
+import { ListRenderItemInfo } from "react-native";
+import Animated, { FadingTransition } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
 export default function HomeScreen() {
   const { spacing } = useAppTheme();
   const { top } = useSafeAreaInsets();
@@ -20,11 +20,12 @@ export default function HomeScreen() {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
     null
   );
-  const { cityPreviewList } = useCities({
+  const { data: cities } = useCities({
     name: debouncedCityName,
     categoryId: selectedCategoryId,
   }); // Filtrar por nome da cidade
 
+  const { data: categories } = useCategories();
   // Navegar com a lista a cima quando clicar no icon
   const flatListRef = useRef(null);
   useScrollToTop(flatListRef);
@@ -39,7 +40,8 @@ export default function HomeScreen() {
 
   return (
     <Screen style={{ paddingHorizontal: 0 }}>
-      <FlatList
+      <Animated.FlatList
+        itemLayoutAnimation={FadingTransition.duration(500)}
         ref={flatListRef}
         // paddingTop => espaçamento de cima devido o ios e android
         contentContainerStyle={{
@@ -47,7 +49,7 @@ export default function HomeScreen() {
           paddingTop: top,
           paddingBottom: spacing.padding,
         }}
-        data={cityPreviewList}
+        data={cities}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}

@@ -7,10 +7,10 @@ import { useAppTheme } from "../components/theme/useAppTheme";
 import { useRelatedCities } from "../data/useRelatedCities";
 import { City } from "../types";
 
-type Props = Pick<City, "relatedCitiesIds">;
-
-export function CityDetailsRelatedCities({ relatedCitiesIds }: Props) {
-  const cities = useRelatedCities(relatedCitiesIds); // vem do nosso useCase (este usecase esta ligado ao nossos types ou seja a nosso objeto)
+type Props = Pick<City, "id">;
+export function CityDetailsRelatedCities({ id }: Props) {
+  const { data: cities } = useRelatedCities(id);
+  // vem do nosso useCase (este usecase esta ligado ao nossos types ou seja a nosso objeto)
   const { spacing } = useAppTheme();
   const { bottom } = useSafeAreaInsets(); // manipulando o espaçamento de baixo
   const { width } = useWindowDimensions();
@@ -32,7 +32,7 @@ export function CityDetailsRelatedCities({ relatedCitiesIds }: Props) {
           paddingHorizontal: spacing.padding,
         }}
       >
-        {cities.map((city) => (
+        {cities?.map((city) => (
           <CityCard
             key={city.id}
             cityPreview={city}

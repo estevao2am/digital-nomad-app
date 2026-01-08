@@ -1,25 +1,38 @@
-import { CityPreview } from "@/src/types";
-import { cities } from "./cities";
+import { CityFilter, supabaseService } from "../supabase/supabaseService";
 
-type CityFilter = {
-  name: string;
-  categoryId: string | null;
-};
-export function useCities({ name, categoryId }: CityFilter): {
-  cityPreviewList: CityPreview[];
-} {
-  let cityPreviewList = [...cities];
+import { useFetchData } from "./useFetchData";
 
-  if (name) {
-    cityPreviewList = cityPreviewList.filter((city) => {
-      return city.name.toLowerCase().includes(name.toLowerCase());
-    });
-  }
-
-  if (categoryId) {
-    cityPreviewList = cityPreviewList.filter((city) => {
-      return city.categories.some((category) => category.id === categoryId);
-    });
-  }
-  return { cityPreviewList };
+export function useCities(filters: CityFilter) {
+  return useFetchData(
+    () => supabaseService.findAll(filters),
+    [filters.name, filters.categoryId]
+  );
 }
+
+// let cityPreviewList = [...cities];
+
+//   if (name) {
+//     cityPreviewList = cityPreviewList.filter((city) => {
+//       return city.name.toLowerCase().includes(name.toLowerCase());
+//     });
+//   }
+
+//   if (categoryId) {
+//     cityPreviewList = cityPreviewList.filter((city) => {
+//       return city.categories.some((category) => category.id === categoryId);
+//     });
+//   }
+
+// let cityPreviewList = [...cities];
+
+//   if (name) {
+//     cityPreviewList = cityPreviewList.filter((city) => {
+//       return city.name.toLowerCase().includes(name.toLowerCase());
+//     });
+//   }
+
+//   if (categoryId) {
+//     cityPreviewList = cityPreviewList.filter((city) => {
+//       return city.categories.some((category) => category.id === categoryId);
+//     });
+//   }
