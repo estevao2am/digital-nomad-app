@@ -1,4 +1,8 @@
-import theme from "@/src/components/theme/theme";
+import { FeedbackProvider } from "@/src/infra/feedbackService/feedbackProvider";
+import { AlertFeedback } from "@/src/infra/feedbackService/src/infra/feedbackService/adapters/Alert/AlertFeedback";
+import { InMemoryRepository } from "@/src/infra/repositories/adapters/inMenory";
+import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
+import theme from "@/src/ui/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
@@ -43,23 +47,28 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Stack
-        screenOptions={{
-          contentStyle: {
-            backgroundColor: theme.colors.background, // para nao piscar o fundo branco ao navegar
-          },
-        }}
-      >
-        <Stack.Screen name="(protected)" options={{ headerShown: false }} />
-        <Stack.Screen name="sign-in" options={{ headerShown: false }} />
+    <FeedbackProvider value={AlertFeedback}>
+      {/* ou AlertFeedBack | ConsoleFeedback*/}
+      <RepositoryProvider value={InMemoryRepository}>
+        <ThemeProvider theme={theme}>
+          <Stack
+            screenOptions={{
+              contentStyle: {
+                backgroundColor: theme.colors.background, // para nao piscar o fundo branco ao navegar
+              },
+            }}
+          >
+            <Stack.Screen name="(protected)" options={{ headerShown: false }} />
+            <Stack.Screen name="sign-in" options={{ headerShown: false }} />
 
-        <Stack.Screen
-          name="modal"
-          options={{ presentation: "modal", title: "Modal" }}
-        />
-      </Stack>
-      <StatusBar style="light" />
-    </ThemeProvider>
+            <Stack.Screen
+              name="modal"
+              options={{ presentation: "modal", title: "Modal" }}
+            />
+          </Stack>
+          <StatusBar style="light" />
+        </ThemeProvider>
+      </RepositoryProvider>
+    </FeedbackProvider>
   );
 }

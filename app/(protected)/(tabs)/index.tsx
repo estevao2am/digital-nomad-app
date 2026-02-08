@@ -1,12 +1,13 @@
-import { Box } from "@/src/components/Box";
-import { CityCard } from "@/src/components/CityCard";
-import { Screen } from "@/src/components/Screen";
-import { useAppTheme } from "@/src/components/theme/useAppTheme";
-import { CityFilter } from "@/src/containers/CityFilter";
-import { useCategories } from "@/src/data/useCategories";
-import { useCities } from "@/src/data/useCities";
-import { useDebounce } from "@/src/hooks/useDebounce";
+import { useCategoryFindAll } from "@/src/domain/category/operations/useCategoryFindAll";
+import { useCityFindAll } from "@/src/domain/city/operations/useCityFindAll";
+import { CityFilter } from "@/src/ui/containers/CityFilter";
+import { useDebounce } from "@/src/utils/hooks/useDebounce";
+
 import { CityPreview } from "@/src/types";
+import { Box } from "@/src/ui/components/Box";
+import { CityCard } from "@/src/ui/components/CityCard";
+import { Screen } from "@/src/ui/components/Screen";
+import { useAppTheme } from "@/src/ui/theme/useAppTheme";
 import { useScrollToTop } from "@react-navigation/native";
 import { useRef, useState } from "react";
 import { ListRenderItemInfo } from "react-native";
@@ -18,14 +19,14 @@ export default function HomeScreen() {
   const [cityName, setCityName] = useState("");
   const debouncedCityName = useDebounce(cityName); // Manter o nome da cidade sem debounce por enquanto
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
-    null
+    null,
   );
-  const { data: cities } = useCities({
+  const { data: cities } = useCityFindAll({
     name: debouncedCityName,
     categoryId: selectedCategoryId,
   }); // Filtrar por nome da cidade
 
-  const { data: categories } = useCategories();
+  const { data: categories } = useCategoryFindAll();
   // Navegar com a lista a cima quando clicar no icon
   const flatListRef = useRef(null);
   useScrollToTop(flatListRef);
